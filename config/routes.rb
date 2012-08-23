@@ -1,13 +1,17 @@
 Keepit140::Application.routes.draw do
   resources :users
+  resources :sessions, only: [:new, :create, :destroy]
 
-  root to: 'static_pages#home'                 # sets root_path
 
-  match '/signup',  to: 'users#new'            # sets signup_path
+  root to: 'static_pages#home'                           # sets root_path
 
-  match '/help',    to: 'static_pages#help'    # sets help_path
-  match '/contact', to: 'static_pages#contact' # sets contact_path
-  match '/about',   to: 'static_pages#about'   # sets about_path
+  match '/signup',  to: 'users#new'                      # sets signup_path
+  match '/signin',  to: 'sessions#new'                   # sets signin_path
+  match '/signout', to: 'sessions#destroy', via: :delete # sets signout_path
+
+  match '/help',    to: 'static_pages#help'              # sets help_path
+  match '/contact', to: 'static_pages#contact'           # sets contact_path
+  match '/about',   to: 'static_pages#about'             # sets about_path
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
